@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Prefectural</title>
+        <link rel="stylesheet" href="index-styles.css">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+        <meta charset="utf-8">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Kosugi+Maru&family=Lato&family=Roboto&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <main>
+            <noscript>Your browser does not support JavaScript! Please install Javascript to continue.</noscript>
+            <div id= "introScreenContainer" class="intro-screen">
+                <div id="intro-screen-darken" onclick="hideIntroCard()">
+                    <div id="intro-screen-card">
+                        <h1 id="introScreenTitle">Welcome to Prefectural!</h1>
+                        <p class="explainingText">Based on the trend of Wordle-inspired games, Prefectural gives you a random Japanese prefecture each day for you to guess. The prefecture is determined using the date, so on a given day it will be the same for everyone.</p>
+                        <p class="explainingText">You have 6 tries to guess the prefecture highlighted on the map in yellow. Type the name of the prefecture in the box, or select it from the dropdown. If the highlighted prefecture is hard to make out, you can hover your mouse over the map to zoom in.</p>
+                        <h2>How does it work?</h2>
+                        <h2>What is a prefecture?</h2>
+                        <p class="explainingText">This game is heavily inspired by [name]'s Worldle, which gives a different country each day.</p>
+                        <p class="explainingText">Click anywhere to begin!</p>
+                        <p class="explainingText">THIS CARD ISN'T DONE YET DON'T JUDGE ME</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-wrapper">
+                <div id="imgDiv" onclick="toggleHover()">
+                    <img alt="Map of Japan with a random unlabelled prefecture colored yellow" src="" id="prefectureImage">
+                </div>
+                <div id = "rightSideContainer" class="right-side">
+                    <h1 id="titleText">Prefectur<span class="green-text">al</span></h1>
+                    <p id="descriptionText" class="description-text"></p>
+                    <p id="remaining-text" class="description-text"></p>
+                    <p id="winning-text" class="description-text" style="display: none"></p>
+                    <p id="lose-text" class="description-text" style="display: none"></p>
+                    <form action="" method="post" id="prefectureGuessForm">
+                        <input list="prefecturesDatalist" type="text" id="prefectureGuess" placeholder="Prefecture" autocomplete="off">
+                        <button title="Enter guess button (not visible)" type="button" id="submitButton" onclick="enterGuessFunction()" hidden></button>
+                        <datalist id="prefecturesDatalist"></datalist>
+                    </form>
+                    <div id="guessBoxContainer">
+                        <div id="guessContainer1" class="guessBoxes" style='display: none'>
+                            <div id="guess1" class="guessTextContainer"></div></div>
+                        <div id="guessContainer2" class="guessBoxes" style='display: none'>
+                            <div id="guess2" class="guessTextContainer"></div></div>
+                        <div id="guessContainer3" class="guessBoxes" style='display: none'>
+                            <div id="guess3" class="guessTextContainer"></div></div>
+                        <div id="guessContainer4" class="guessBoxes" style='display: none'>
+                            <div id="guess4" class="guessTextContainer"></div></div>
+                        <div id="guessContainer5" class="guessBoxes" style='display: none'>
+                            <div id="guess5" class="guessTextContainer"></div></div>
+                        <div id="guessContainer6" class="guessBoxes" style='display: none'>
+                            <div id="guess6" class="guessTextContainer"></div></div>
+                    </div>
+                    <p id="answerReveal"></p>
+                    <p id="hintLines" style="display: none"></p>
+                    <a id="googleAnchor" href="" target="_blank" style="display:none">Google this prefecture!</a>
+                    <div id="footerBar">
+                        <img alt="Question mark icon for help" src="question.png" id="helpIcon" onclick="showIntroCard()">
+                        <p id="japaneseModeButton" class="buttonCursor" onclick="switchJapaneseMode()">日本語</p>
+                    </div>
+                </div>
+            </div>
+            <script src="genPrefectureScript.js" type="text/javascript"></script>
+        </main>
+    </body>
+</html>
