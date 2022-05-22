@@ -8,27 +8,48 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Kosugi+Maru&family=Lato&family=Roboto&display=swap" rel="stylesheet">
+        <script src="https://unpkg.com/wanakana"></script>
     </head>
     <body>
         <main>
             <noscript>Your browser does not support JavaScript! Please install Javascript to continue.</noscript>
             <div id= "introScreenContainer" class="intro-screen">
-                <div id="intro-screen-darken" onclick="hideIntroCard()">
-                    <div id="intro-screen-card">
-                        <h1 id="introScreenTitle">Welcome to Prefectural!</h1>
-                        <p class="explainingText">Based on the trend of Wordle-inspired games, Prefectural gives you a random Japanese prefecture each day for you to guess. The prefecture is determined using the date, so on a given day it will be the same for everyone.</p>
-                        <p class="explainingText">You have 6 tries to guess the prefecture highlighted on the map in yellow. Type the name of the prefecture in the box, or select it from the dropdown. If the highlighted prefecture is hard to make out, you can hover your mouse over the map to zoom in.</p>
-                        <h2>How does it work?</h2>
-                        <h2>What is a prefecture?</h2>
-                        <p class="explainingText">This game is heavily inspired by [name]'s Worldle, which gives a different country each day.</p>
-                        <p class="explainingText">Click anywhere to begin!</p>
-                        <p class="explainingText">THIS CARD ISN'T DONE YET DON'T JUDGE ME</p>
-                    </div>
+                <div id="intro-screen-darken" onclick="hideIntroCard()"></div>
+                <div id="intro-screen-card">
+                    <h1 id="introScreenTitle">Welcome to Prefectural!</h1>
+                    <p class="explainingText">Based on the trend of <a href="https://www.nytimes.com/games/wordle/index.html" target="_blank" style="text-decoration: none;color: rgb(116, 209, 223)">Wordle</a>-inspired games, Prefectural gives you a random Japanese prefecture each day for you to guess. The prefecture is determined using the date, so on a given day it will be the same for everyone.</p>
+                    <p class="explainingText">You have 6 tries to guess the prefecture highlighted on the map in <span style="color: #F2E71A">yellow</span>. Type the name of the prefecture in the box, or select it from the dropdown. If the highlighted prefecture is hard to make out, you can click/tap on the map to zoom in.</p>
+                    <p class="explainingText">This game is heavily inspired by <a href="https://twitter.com/teuteuf" target="_blank" style="text-decoration: none;color: rgb(116, 209, 223)">@teuteuf</a>'s similar web game, <a href="https://worldle.teuteuf.fr/" target="_blank" style="text-decoration: none;color: rgb(116, 209, 223)">Worldle</a>, which gives a different country each day.</p>
+                    <p class="explainingText">Click outside this box to begin!</p>
+                    <h2 class="introSubHeading">What is a prefecture?</h2>
+                    <p class="explainingText">Japan can be split up in many ways, with the largest being the four main islands of Japan. After that, Japan can be further broken up into 8 regions and then 47 prefectures. Prefectures are administrative divisions of Japan, like states in the US or India, or Oblasts in Russia. Prefectures typically have historical and cultural significance, with different prefectures being known for different things.</p>
+                    <p class="explainingText">These prefectures are split among the following four islands:</p>
+                    <dl>
+                        <dt class="explainingText"><a href="https://en.wikipedia.org/wiki/Honshu" target="_blank" style="text-decoration: none;color: rgb(116, 209, 223); font-size: 22px;">Honshu</a><dd class="explainingText" style="padding: 5px 0px 20px 30px">This is the largest island, containing 34 of the 47 prefectures. This includes some of the biggest cities such as Tokyo, Osaka, and Kyoto.</dd></dt>
+                        <dt class="explainingText"><a href="https://en.wikipedia.org/wiki/Hokkaido" target="_blank" style="text-decoration: none;color: rgb(116, 209, 223); font-size: 22px;">Hokkaido</a><dd class="explainingText" style="padding: 5px 0px 20px 30px">This is the second largest island, and is in itself a prefecture. Hokkaido is located at the northern end of Japan and along with being the coldest, also features the best climates for growing many crops. Because of this, Hokkaido is known for its produce.</dd></dt>
+                        <dt class="explainingText"><a href="https://en.wikipedia.org/wiki/Kyushu" target="_blank" style="text-decoration: none;color: rgb(116, 209, 223); font-size: 22px;">Kyushu</a><dd class="explainingText" style="padding: 5px 0px 20px 30px">Kyushu is the third largest island and is located at the south western end of Honshu. Kyushu is made up of 7 mainland prefectures and the tropical archipelago prefecture of Okinawa. It is home to the cities of Fukuoka and Nagasaki, and is the closest island to South Korea.</dd></dt>
+                        <dt class="explainingText"><a href="https://en.wikipedia.org/wiki/Shikoku" target="_blank" style="text-decoration: none;color: rgb(116, 209, 223); font-size: 22px;">Shikoku</a><dd class="explainingText" style="padding: 5px 0px 20px 30px">Shikoku is the smallest of the main islands and is located east of Kyushu. Shikoku is made up of 4 prefectures and is seperated from Honshu by the <a href="https://en.wikipedia.org/wiki/Seto_Inland_Sea" target="_blank" style="text-decoration: none;color: rgb(116, 209, 223)">Seto inland sea.</a></dd></dt>
+                    </dl>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Regions_and_Prefectures_of_Japan_2.svg" id="explanationMap">
+                    <p class="explainingText">In Japanese, the prefecture system is known as <i>都道府県（とどうふけん todoufuken)</i>. This is different to English, as not every prefecture is considered to be a 'prefecture' (県). There are 4 exceptions.</p>
+                    <dl>
+                        <dt class="explainingText"><a href="https://en.wikipedia.org/wiki/Prefectures_of_Japan#To" target="_blank" style="text-decoration: none;color: rgb(116, 209, 223); font-size: 22px;">Tokyo (都)</a><dd class="explainingText" style="padding: 5px 0px 20px 30px">Tokyo prefecture is known as <i>東京都 (Tōkyō-to)</i> in Japanese. 都 meaning "metropolis" includes the capital, Tokyo city, surrounding urban and rural areas, and the Ogasawara islands.</dd></dt>
+                        <dt class="explainingText"><a href="https://en.wikipedia.org/wiki/Prefectures_of_Japan#D%C5%8D" target="_blank" style="text-decoration: none;color: rgb(116, 209, 223); font-size: 22px;">Hokkaido (道)</a><dd class="explainingText" style="padding: 5px 0px 20px 30px">Hokkaido prefectures's name in Japanese is the same, <i>北海道 (Hokkaidō)</i>. This division <i>道 (dō)</i> is historical and is a part of the name of both the prefecture and the island.</dd></dt>
+                        <dt class="explainingText"><a href="https://en.wikipedia.org/wiki/Prefectures_of_Japan#Fu" target="_blank" style="text-decoration: none;color: rgb(116, 209, 223); font-size: 22px;">Osaka (府) and Kyoto (府)</a><dd class="explainingText" style="padding: 5px 0px 20px 30px">The prefectures of Osaka and Kyoto are known as <i>大阪府 (Ōsaka-fu)</i> and <i>京都府 (Kyōto-fu)</i> respectively, and they use the suffix <i>府 (fu)</i>. This is also purely historical and is functionally the same as <i>県 (ken)</i>.</dd></dt>
+                        <dt class="explainingText"><a href="https://en.wikipedia.org/wiki/Prefectures_of_Japan#Ken" target="_blank" style="text-decoration: none;color: rgb(116, 209, 223); font-size: 22px;">Others (県)</a><dd  class="explainingText" style="padding: 5px 0px 20px 30px">All 43 other prefectures use the suffix <i>県 (ken)</i>. This can most closely be translated to the suffix "prefecture" in English.</dd>
+                    </dl>
+                    <p class="explainingText"><a href="https://en.wikipedia.org/wiki/Prefectures_of_Japan" target="_blank" style="text-decoration: none;color: rgb(116, 209, 223)">More information can be found on Wikipedia.</a></p>
+                    <h2 class="introSubHeading">How does it work?</h2>
+                    <p class="explainingText">I made it and I don't even know, magic.</p>
                 </div>
             </div>
             <div class="flex-wrapper">
+                <div id="streakContainer" title="Your current streak is 3 days!" style="display: none">
+                    <img src="fire.png" id="streakIcon">
+                    <p id="streakNumber"></p>
+                </div>
                 <div id="imgDiv" onclick="toggleHover()">
-                    <img alt="Map of Japan with a random unlabelled prefecture colored yellow" src="" id="prefectureImage">
+                    <img alt="Japan prefecture move" src="" id="prefectureImage">
                 </div>
                 <div id = "rightSideContainer" class="right-side">
                     <h1 id="titleText">Prefectur<span class="green-text">al</span></h1>
@@ -57,7 +78,7 @@
                     </div>
                     <p id="answerReveal"></p>
                     <p id="hintLines" style="display: none"></p>
-                    <a id="googleAnchor" href="" target="_blank" style="display:none">Google this prefecture!</a>
+                    <a id="googleAnchor" href="" target="_blank" title="Click this button to google this prefecture!" style="display:none">Google this prefecture!</a>
                     <div id="footerBar">
                         <img alt="Question mark icon for help" src="question.png" id="helpIcon" onclick="showIntroCard()">
                         <p id="japaneseModeButton" class="buttonCursor" onclick="switchJapaneseMode()">日本語</p>

@@ -11,6 +11,7 @@ var japaneseMode;
 var nameLang;
 var numLang;
 var hover = 0;
+var textInput = document.getElementById('prefectureGuess');
 
 // This checks cache to see if the user has visited the page before. If not, it displays the help screen. 
 if (localStorage.getItem("visitedBefore") == null){
@@ -24,284 +25,331 @@ if (localStorage.getItem("visitedBefore") == null){
 const prefecturesList = {
     hokkaido: {
         ID: 0,
-        nameEn: "Hokkaido",
+        nameEN: "Hokkaido",
         nameJP: "北海道",
+        nameKana: "ほっかいどう",
         latlong: [43.06417,141.34694]
     },
     aomori: {
         ID: 1,
-        nameEn: "Aomori",
+        nameEN: "Aomori",
         nameJP: "青森",
+        nameKana: "あおもり",
         latlong: [40.82444,140.74],
     },
     iwate: {
         ID: 2,
-        nameEn: "Iwate",
+        nameEN: "Iwate",
         nameJP: "岩手",
+        nameKana: "いわて",
         latlong: [39.70361,141.1525],
     },
     miyagi: {
         ID: 3,
-        nameEn: "Miyagi",
+        nameEN: "Miyagi",
         nameJP: "宮城",
+        nameKana: "みやぎ",
         latlong: [38.26889,140.87194],
     },
     akita: {
         ID: 4,
-        nameEn: "Akita",
+        nameEN: "Akita",
         nameJP: "秋田",
+        nameKana: "あきた",
         latlong: [39.71861,140.1025],
     },
     yamagata: {
         ID: 5,
-        nameEn: "Yamagata",
+        nameEN: "Yamagata",
         nameJP: "山形",
+        nameKana: "やまがた",
         latlong: [38.24056,140.36333],
     },
     fukushima: {
         ID: 6,
-        nameEn: "Fukushima",
+        nameEN: "Fukushima",
         nameJP: "福島",
+        nameKana: "ふくしま",
         latlong: [37.75,140.46778],
     },
     ibaraki: {
         ID: 7,
-        nameEn: "Ibaraki",
+        nameEN: "Ibaraki",
         nameJP: "茨城",
+        nameKana: "いばらき",
         latlong: [36.341390,140.44667],
     },
     tochigi: {
         ID: 8,
-        nameEn: "Tochigi",
+        nameEN: "Tochigi",
         nameJP: "栃木",
+        nameKana: "とちぎ",
         latlong: [36.56583,139.88361],
     },
     gunma: {
         ID: 9,
-        nameEn: "Gunma",
+        nameEN: "Gunma",
         nameJP: "群馬",
+        nameKana: "ぐんま",
         latlong: [36.39111,139.06083],
     },
     saitama: {
         ID: 10,
-        nameEn: "Saitama",
+        nameEN: "Saitama",
         nameJP: "埼玉",
+        nameKana: "さいたま",
         latlong: [35.85694,139.64889],
     },
     chiba: {
         ID: 11,
-        nameEn: "Chiba",
+        nameEN: "Chiba",
         nameJP: "千葉",
+        nameKana: "ちば",
         latlong: [35.60472,140.12333],
     },
     tokyo: {
         ID: 12,
-        nameEn: "Tokyo",
+        nameEN: "Tokyo",
         nameJP: "東京",
+        nameKana: "とうきょう",
         latlong: [35.68944,139.69167],
     },
     kanagawa: {
         ID: 13,
-        nameEn: "Kanagawa",
+        nameEN: "Kanagawa",
         nameJP: "神奈川",
+        nameKana: "かながわ",
         latlong: [35.44778,139.6425],
     },
     niigata: {
         ID: 14,
-        nameEn: "Niigata",
+        nameEN: "Niigata",
         nameJP: "新潟",
+        nameKana: "にいがた",
         latlong: [37.90222,139.02361],
     },
     toyama: {
         ID: 15,
-        nameEn: "Toyama",
+        nameEN: "Toyama",
         nameJP: "富山",
+        nameKana: "とやま",
         latlong: [36.69528,137.21139],
     },
     ishikawa: {
         ID: 16,
-        nameEn: "Ishikawa",
+        nameEN: "Ishikawa",
         nameJP: "石川",
+        nameKana: "いしかわ",
         latlong: [36.59444,136.62556],
     },
     fukui: {
         ID: 17,
-        nameEn: "Fukui",
+        nameEN: "Fukui",
         nameJP: "福井",
+        nameKana: "ふくい",
         latlong: [36.06528,136.22194],
     },
     yamanashi: {
         ID: 18,
-        nameEn: "Yamanashi",
+        nameEN: "Yamanashi",
         nameJP: "山梨",
+        nameKana: "やまなし",
         latlong: [35.66389,138.56833],
     },
     nagano: {
         ID: 19,
-        nameEn: "Nagano",
+        nameEN: "Nagano",
         nameJP: "長野",
+        nameKana: "ながの",
         latlong: [36.65139,138.18111],
     },
     gifu: {
         ID: 20,
-        nameEn: "Gifu",
+        nameEN: "Gifu",
         nameJP: "岐阜",
+        nameKana: "ぎふ",
         latlong: [35.39111,136.72222],
     },
     shizuoka: {
         ID: 21,
-        nameEn: "Shizuoka",
+        nameEN: "Shizuoka",
         nameJP: "静岡",
+        nameKana: "しずおか",
         latlong: [34.97694,138.38306],
     },
     aichi: {
         ID: 22,
-        nameEn: "Aichi",
+        nameEN: "Aichi",
         nameJP: "愛知",
+        nameKana: "あいち",
         latlong: [35.18028,136.90667],
     },
     mie: {
         ID: 23,
-        nameEn: "Mie",
+        nameEN: "Mie",
         nameJP: "三重",
+        nameKana: "みえ",
         latlong: [34.73028,136.50861],
     },
     shiga: {
         ID: 24,
-        nameEn: "Shiga",
+        nameEN: "Shiga",
         nameJP: "滋賀",
+        nameKana: "しが",
         latlong: [35.00444,135.86833],
     },
     kyoto: {
         ID: 25,
-        nameEn: "Kyoto",
+        nameEN: "Kyoto",
         nameJP: "京都",
+        nameKana: "きょうと",
         latlong: [35.02139,135.75556],
     },
     osaka: {
         ID: 26,
-        nameEn: "Osaka",
+        nameEN: "Osaka",
         nameJP: "大阪",
+        nameKana: "おおさか",
         latlong: [34.68639,135.52],
     },
     hyogo: {
         ID: 27,
-        nameEn: "Hyogo",
+        nameEN: "Hyogo",
         nameJP: "兵庫",
+        nameKana: "ひょうご",
         latlong: [34.69139,135.18306],
     },
     nara: {
         ID: 28,
-        nameEn: "Nara",
+        nameEN: "Nara",
         nameJP: "奈良",
+        nameKana: "なら",
         latlong: [34.68528,135.83278],
     },
     wakayama: {
         ID: 29,
-        nameEn: "Wakayama",
+        nameEN: "Wakayama",
         nameJP: "和歌山",
+        nameKana: "わかやま",
         latlong: [34.22611,135.1675],
     },
     tottori: {
         ID: 30,
-        nameEn: "Tottori",
+        nameEN: "Tottori",
         nameJP: "鳥取",
+        nameKana: "とっとり",
         latlong: [35.50361,134.23833],
     },
     shimane: {
         ID: 31,
-        nameEn: "Shimane",
+        nameEN: "Shimane",
         nameJP: "島根",
+        nameKana: "しまね",
         latlong: [35.47222,133.05056],
     },
     okayama: {
         ID: 32,
-        nameEn: "Okayama",
+        nameEN: "Okayama",
         nameJP: "岡山",
+        nameKana: "おかやま",
         latlong: [34.66167,133.935],
     },
     hiroshima: {
         ID: 33,
-        nameEn: "Hiroshima",
+        nameEN: "Hiroshima",
         nameJP: "広島",
+        nameKana: "ひろしま",
         latlong: [34.39639,132.45944],
     },
     yamaguchi: {
         ID: 34,
-        nameEn: "Yamaguchi",
+        nameEN: "Yamaguchi",
         nameJP: "山口",
+		nameKana: "やまぐち",
         latlong: [34.18583,131.47139],
     },
     tokushima: {
         ID: 35,
-        nameEn: "Tokushima",
+        nameEN: "Tokushima",
         nameJP: "徳島",
+		nameKana: "とくしま",
         latlong: [34.06583,134.55944],
     },
     kagawa: {
         ID: 36,
-        nameEn: "Kagawa",
+        nameEN: "Kagawa",
         nameJP: "香川",
+		nameKana: "かがわ",
         latlong: [34.34028,134.04333],
     },
     ehime: {
         ID: 37,
-        nameEn: "Ehime",
+        nameEN: "Ehime",
         nameJP: "愛媛",
+		nameKana: "えひめ",
         latlong: [33.84167,132.76611],
     },
     kochi: {
         ID: 38,
-        nameEn: "Kochi",
+        nameEN: "Kochi",
         nameJP: "高知",
+		nameKana: "こうち",
         latlong: [33.55972,133.53111],
     },
     fukuoka: {
         ID: 39,
-        nameEn: "Fukuoka",
+        nameEN: "Fukuoka",
         nameJP: "福岡",
+		nameKana: "ふくおか",
         latlong: [33.60639,130.41806],
     },
     saga: {
         ID: 40,
-        nameEn: "Saga",
+        nameEN: "Saga",
         nameJP: "佐賀",
+		nameKana: "さが",
         latlong: [33.24944,130.29889],
     },
     nagasaki: {
         ID: 41,
-        nameEn: "Nagasaki",
+        nameEN: "Nagasaki",
         nameJP: "長崎",
+		nameKana: "ながさき",
         latlong: [32.74472,129.87361],
     },
     kumamoto: {
         ID: 42,
-        nameEn: "Kumamoto",
+        nameEN: "Kumamoto",
         nameJP: "熊本",
+		nameKana: "くまもと",
         latlong: [32.78972,130.74167],
     },
     oita: {
         ID: 43,
-        nameEn: "Oita",
+        nameEN: "Oita",
         nameJP: "大分",
+		nameKana: "おおいた",
         latlong: [33.23806,131.6125],
     },
     miyazaki: {
         ID: 44,
-        nameEn: "Miyazaki",
+        nameEN: "Miyazaki",
         nameJP: "宮崎",
+		nameKana: "みやざき",
         latlong: [31.91111,131.42389],
     },
     kagoshima: {
         ID: 45,
-        nameEn: "Kagoshima",
+        nameEN: "Kagoshima",
         nameJP: "鹿児島",
+		nameKana: "かごしま",
         latlong: [31.56028,130.55806],
     },
     okinawa: {
         ID: 46,
-        nameEn: "Okinawa",
+        nameEN: "Okinawa",
         nameJP: "沖縄",
+		nameKana: "おきなわ",
         latlong: [26.2125,127.68111],
     },
 }
@@ -354,7 +402,7 @@ function getPrefecture(){
     let prefectureDetails = [];
     for (const prefName in prefecturesList){
         if (prefecturesList[prefName]['ID'] == todayVal){
-            prefectureDetails = [prefName, prefecturesList[prefName]['nameEn'], prefecturesList[prefName]['nameJP'], prefecturesList[prefName]['latlong']];
+            prefectureDetails = [prefName, prefecturesList[prefName]['nameEN'], prefecturesList[prefName]['nameJP'], prefecturesList[prefName]['nameKana'], prefecturesList[prefName]['latlong']];
         }
     }
     return prefectureDetails;
@@ -438,6 +486,45 @@ function checkPastWeek(){
     return todayVal;
 }
 
+function findStreak(){
+    let date = dateToday;
+    let dateToCheck;
+    let year = parseInt(String(date).substring(0,4));
+    let month = parseInt(String(date).substring(4,6));
+    let day = parseInt(String(date).substring(6,8));
+    let daysCount = 1;
+    while (true){
+        if (day - 1 < 1){
+            if (month - 1 < 1){
+                year --;
+                month = 12;
+            } else {
+                month --;
+            }
+            day = checkMonth(day, month, year);
+        } else{
+            day -= 1;
+        }
+        dateToCheck = String(year)+String(month)+String(day);
+        if (localStorage.getItem(parseInt(dateToCheck)) != null){
+            daysCount++;
+        } else {
+            break;
+        }
+    }
+    return daysCount;
+}
+
+function updateStreak(){
+    let currentStreak = findStreak();
+    document.getElementById("streakNumber").innerHTML = currentStreak;
+    if (currentStreak == 1){
+        document.getElementById("streakContainer").setAttribute("title", `Your current streak is 1 day!`)
+    } else {
+        document.getElementById("streakContainer").setAttribute("title", `Your current streak is ${currentStreak} days!`)
+    }
+}
+
 function getDirection(lat, long){
     let angle = Math.atan(long/lat) * 180 / Math.PI;
     let directionArrow = ""
@@ -485,14 +572,14 @@ function normalModeHint(currentGuess){
 }
 
 function hardModeHint(){
-    let correctPref = prefectureToday[3];
+    let correctPref = prefectureToday[4];
     let guessPref = "mie";
     console.log(`Correct: ${prefectureToday[1]}`);
     console.log(`Guess: ${guessPref}`);
     let guessDetails = [];
     for (const prefName in prefecturesList){
         if (prefName == guessPref){
-            guessDetails = [prefName, prefecturesList[prefName]['nameEn'], prefecturesList[prefName]['nameJP'], prefecturesList[prefName]['latlong']];
+            guessDetails = [prefName, prefecturesList[prefName]['nameEN'], prefecturesList[prefName]['nameJP'], prefecturesList[prefName]['latlong']];
         }
     }
     let lat = correctPref[0] - guessDetails[3][0];
@@ -522,7 +609,7 @@ function calcImgPos(lat, long){
 }
 
 function setTransformOrigin(){
-    let correctPref = prefectureToday[3];
+    let correctPref = prefectureToday[4];
     let origin = calcImgPos(correctPref[0], correctPref[1]);
     document.getElementById("prefectureImage").style.transformOrigin = `${origin[0]}% ${origin[1]}%`;
     //return `${origin[0]}% ${origin[1]}%`;
@@ -584,6 +671,7 @@ function setGuesses(currentGuess=1, inputVal){
             document.getElementById("hintLines").style.display = "none"
             document.getElementById("googleAnchor").style.display = "block";
             document.getElementById("googleAnchor").setAttribute("href", `https://www.google.com/search?q=${prefectureToday[1]} Prefecture`);
+            document.getElementById(`streakContainer`).style.display = "flex";
         } else if (currentGuess < 6){
             document.getElementById(`guessContainer${currentGuess}`).style.display = "block";
             document.getElementById(`guess${currentGuess}`).innerHTML = inputVal + prefectureSuffix;
@@ -599,6 +687,7 @@ function setGuesses(currentGuess=1, inputVal){
             document.getElementById("lose-text").innerHTML = "残念！";
             document.getElementById("remaining-text").style.display = "none";
             document.getElementById("hintLines").style.display = "none"
+            document.getElementById(`streakContainer`).style.display = "flex";
         }
     // ENGLISH MODE SET GUESSES
     } else {
@@ -615,6 +704,7 @@ function setGuesses(currentGuess=1, inputVal){
             document.getElementById("hintLines").style.display = "none"
             document.getElementById("googleAnchor").style.display = "block";
             document.getElementById("googleAnchor").setAttribute("href", `https://www.google.com/search?q=${prefectureToday[1]} Prefecture`);
+            document.getElementById(`streakContainer`).style.display = "flex";
         } else if (currentGuess < 6){
             document.getElementById(`guessContainer${currentGuess}`).style.display = "block";
             document.getElementById(`guess${currentGuess}`).innerHTML = inputVal;
@@ -636,6 +726,7 @@ function setGuesses(currentGuess=1, inputVal){
             document.getElementById("hintLines").style.display = "none"
             document.getElementById("googleAnchor").style.display = "block";
             document.getElementById("googleAnchor").setAttribute("href", `https://www.google.com/search?q=${prefectureToday[1]} Prefecture`);
+            document.getElementById(`streakContainer`).style.display = "flex";
         }
     }
 }
@@ -661,9 +752,9 @@ function enterGuessFunction(){
 var input = document.getElementById("prefectureGuessForm");
 
 input.addEventListener("keypress", function(event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    document.getElementById("submitButton").click();
+    if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("submitButton").click();
   }
 });
 
@@ -681,7 +772,7 @@ function convertCache(){
         currentGuess = localStorage.getItem(dateToday);
         for (let i = 1; i <= parseInt(currentGuess) - 1; i++){
             for (prefName in prefecturesList){
-                if (prefecturesList[prefName]["nameEn"] == localStorage.getItem(i)){
+                if (prefecturesList[prefName]["nameEN"] == localStorage.getItem(i)){
                     localStorage.setItem(i, prefecturesList[prefName]["nameJP"]);
                 }
             }
@@ -691,7 +782,7 @@ function convertCache(){
         for (let i = 1; i <= parseInt(currentGuess) - 1; i++){
             for (prefName in prefecturesList){
                 if (prefecturesList[prefName]["nameJP"] == localStorage.getItem(i)){
-                    localStorage.setItem(i, prefecturesList[prefName]["nameEn"]);
+                    localStorage.setItem(i, prefecturesList[prefName]["nameEN"]);
                 }
             }
         }
@@ -699,6 +790,7 @@ function convertCache(){
 }
 
 function checkJapaneseMode(){
+    wanakana.bind(textInput, { IMEMode: true });
     if (localStorage.getItem("japaneseMode") == null){
         localStorage.setItem("japaneseMode", "false");
     }
@@ -709,11 +801,12 @@ function checkJapaneseMode(){
         document.getElementById("prefectureGuess").setAttribute("placeholder", "都道府県");
         document.getElementById("descriptionText").innerHTML = `<span id="yellowSpan">黄色</span>の都道府県はどちらか当ててごらん`
     } else {
-        nameLang = "nameEn";
+        nameLang = "nameEN";
         numLang = 1;
         document.getElementById("japaneseModeButton").style.color = "#666";
         document.getElementById("prefectureGuess").setAttribute("placeholder", "Prefecture");
-        document.getElementById("descriptionText").innerHTML = `Guess the prefecture highlighted in <span id="yellowSpan">yellow</span>`
+        document.getElementById("descriptionText").innerHTML = `Guess the prefecture highlighted in <span id="yellowSpan">yellow</span>`;
+        wanakana.unbind(textInput);
     }
     genOptions();
     convertCache();
@@ -723,6 +816,7 @@ function checkJapaneseMode(){
 function switchJapaneseMode(){
     if (localStorage.getItem("japaneseMode") == "true"){
         localStorage.setItem("japaneseMode", "false");
+        wanakana.unbind(textInput);
     } else {
         localStorage.setItem("japaneseMode", "true");
     }
@@ -735,6 +829,7 @@ function switchJapaneseMode(){
 let prefImg = `./Japan Maps/japanmap_${prefectureToday[0]}.png`;
 document.getElementById("prefectureImage").setAttribute("src", prefImg);
 setTransformOrigin();
+updateStreak();
 //genOptions();
 //checkCache();
 
