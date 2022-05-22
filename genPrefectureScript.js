@@ -505,7 +505,10 @@ function findStreak(){
         } else{
             day -= 1;
         }
+        month = String(month).padStart(2, '0')
+        day = String(day).padStart(2, '0')
         dateToCheck = String(year)+String(month)+String(day);
+        console.log(dateToCheck);
         if (localStorage.getItem(parseInt(dateToCheck)) != null){
             daysCount++;
         } else {
