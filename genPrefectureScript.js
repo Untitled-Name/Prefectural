@@ -234,7 +234,7 @@ const prefecturesList = {
     },
     tokushima: {
         ID: 35,
-        nameEn: "Tokshima",
+        nameEn: "Tokushima",
         nameJP: "徳島",
         latlong: [34.06583,134.55944],
     },
