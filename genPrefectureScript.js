@@ -11,6 +11,7 @@ var japaneseMode;
 var nameLang;
 var numLang;
 var hover = 0;
+var currentStreak;
 var textInput = document.getElementById('prefectureGuess');
 
 // This checks cache to see if the user has visited the page before. If not, it displays the help screen. 
@@ -18,9 +19,6 @@ if (localStorage.getItem("visitedBefore") == null){
     document.getElementById("introScreenContainer").style.display = "flex";
     localStorage.setItem("visitedBefore", true);
 }
-
-// This checks if "japaneseMode" exists in the cache, and creates it if not, setting it to false (English mode).
-// If true, Japanese mode is set. If false (default), English mode is set.
 
 const prefecturesList = {
     hokkaido: {
@@ -365,6 +363,7 @@ function checkCache(){
     if (localStorage.getItem(dateToday) == null){
         for (let i = 1; i < 7; i++){
             localStorage.removeItem(i);
+            localStorage.setItem("DoneToday", "false");
         }
     } else{
         currentGuess = localStorage.getItem(dateToday);
@@ -515,11 +514,17 @@ function findStreak(){
             break;
         }
     }
-    return daysCount;
+    if (localStorage.getItem("DoneToday") == "false"){
+        document.getElementById("streakIcon").setAttribute("src", "fire_gray.png");
+        return daysCount - 1;
+    } else {
+        document.getElementById("streakIcon").setAttribute("src", "fire.png");
+        return daysCount;
+    }
 }
 
 function updateStreak(){
-    let currentStreak = findStreak();
+    currentStreak = findStreak();
     document.getElementById("streakNumber").innerHTML = currentStreak;
     if (currentStreak == 1){
         document.getElementById("streakContainer").setAttribute("title", `Your current streak is 1 day!`)
@@ -641,6 +646,15 @@ function genOptions(){
 }
 
 function checkGuess(inputVal){
+    if (localStorage.getItem("japaneseMode") == "1") {
+        if (wanakana.isHiragana(inputVal)){
+            for (const prefName in prefecturesList){
+                if (prefecturesList[prefName]["nameKana"] == inputVal){
+                    inputVal = prefecturesList[prefName]["nameJP"];
+                }
+            }
+        }
+    }
     inputVal = inputVal.toLowerCase();
     inputVal = inputVal.charAt(0).toUpperCase() + inputVal.slice(1);
     currentGuess = checkCache();
@@ -650,7 +664,7 @@ function checkGuess(inputVal){
 
 function setGuesses(currentGuess=1, inputVal){
     // JAPANESE MODE SET GUESSES
-    if (localStorage.getItem("japaneseMode") == "true"){
+    if (localStorage.getItem("japaneseMode") == "1"){
         correctPref = prefectureToday[2];
         let prefectureSuffix;
         if (inputVal == "東京"){
@@ -670,11 +684,12 @@ function setGuesses(currentGuess=1, inputVal){
             document.getElementById("prefectureGuess").setAttribute("disabled", "");
             document.getElementById("remaining-text").style.display = "none";
             document.getElementById("winning-text").style.display = "block";
-            document.getElementById("winning-text").innerHTML = "地理上手！";
+            document.getElementById("winning-text").innerHTML = "<ruby><rb>地<rt>ち</rt></rb><rb>理<rt>り</rt></rb><rb>上<rt>じょう</rt></rb><rb>手<rt>ず</rt></rb></ruby>！";
             document.getElementById("hintLines").style.display = "none"
             document.getElementById("googleAnchor").style.display = "block";
             document.getElementById("googleAnchor").setAttribute("href", `https://www.google.com/search?q=${prefectureToday[1]} Prefecture`);
-            document.getElementById(`streakContainer`).style.display = "flex";
+            localStorage.setItem("DoneToday", "true");
+            updateStreak();
         } else if (currentGuess < 6){
             document.getElementById(`guessContainer${currentGuess}`).style.display = "block";
             document.getElementById(`guess${currentGuess}`).innerHTML = inputVal + prefectureSuffix;
@@ -690,7 +705,8 @@ function setGuesses(currentGuess=1, inputVal){
             document.getElementById("lose-text").innerHTML = "残念！";
             document.getElementById("remaining-text").style.display = "none";
             document.getElementById("hintLines").style.display = "none"
-            document.getElementById(`streakContainer`).style.display = "flex";
+            localStorage.setItem("DoneToday", "true");
+            updateStreak();
         }
     // ENGLISH MODE SET GUESSES
     } else {
@@ -707,7 +723,8 @@ function setGuesses(currentGuess=1, inputVal){
             document.getElementById("hintLines").style.display = "none"
             document.getElementById("googleAnchor").style.display = "block";
             document.getElementById("googleAnchor").setAttribute("href", `https://www.google.com/search?q=${prefectureToday[1]} Prefecture`);
-            document.getElementById(`streakContainer`).style.display = "flex";
+            localStorage.setItem("DoneToday", "true");
+            updateStreak();
         } else if (currentGuess < 6){
             document.getElementById(`guessContainer${currentGuess}`).style.display = "block";
             document.getElementById(`guess${currentGuess}`).innerHTML = inputVal;
@@ -729,7 +746,8 @@ function setGuesses(currentGuess=1, inputVal){
             document.getElementById("hintLines").style.display = "none"
             document.getElementById("googleAnchor").style.display = "block";
             document.getElementById("googleAnchor").setAttribute("href", `https://www.google.com/search?q=${prefectureToday[1]} Prefecture`);
-            document.getElementById(`streakContainer`).style.display = "flex";
+            localStorage.setItem("DoneToday", "true");
+            updateStreak();
         }
     }
 }
@@ -737,7 +755,7 @@ function setGuesses(currentGuess=1, inputVal){
 function validInput(inputVal){
     let valid = false;
     for (const prefName in prefecturesList){
-        if (inputVal.toUpperCase() == prefName.toUpperCase() || inputVal == prefecturesList[prefName]["nameJP"]){
+        if (inputVal.toUpperCase() == prefName.toUpperCase() || inputVal == prefecturesList[prefName]["nameJP"] || inputVal == prefecturesList[prefName]["nameKana"]){
             valid = true;
         }
     }
@@ -771,7 +789,7 @@ function hideIntroCard(){
 
 function convertCache(){
     console.log("convertCache called");
-    if (localStorage.getItem("japaneseMode") == "true"){
+    if (localStorage.getItem("japaneseMode") == "1"){
         currentGuess = localStorage.getItem(dateToday);
         for (let i = 1; i <= parseInt(currentGuess) - 1; i++){
             for (prefName in prefecturesList){
@@ -792,12 +810,14 @@ function convertCache(){
     }
 }
 
+// japaneseMode = 0: English, japaneseMode = 1: Japanese (no kana), japaneseMode = 2: Japanese (kana)
+
 function checkJapaneseMode(){
     wanakana.bind(textInput, { IMEMode: true });
     if (localStorage.getItem("japaneseMode") == null){
-        localStorage.setItem("japaneseMode", "false");
+        localStorage.setItem("japaneseMode", "0");
     }
-    if (localStorage.getItem("japaneseMode") == "true"){
+    if (localStorage.getItem("japaneseMode") == "1"){
         nameLang = "nameJP";
         numLang = 2;
         document.getElementById("japaneseModeButton").style.color = "#FFF";
@@ -817,11 +837,11 @@ function checkJapaneseMode(){
 }
 
 function switchJapaneseMode(){
-    if (localStorage.getItem("japaneseMode") == "true"){
-        localStorage.setItem("japaneseMode", "false");
+    if (localStorage.getItem("japaneseMode") == "1"){
+        localStorage.setItem("japaneseMode", "0");
         wanakana.unbind(textInput);
     } else {
-        localStorage.setItem("japaneseMode", "true");
+        localStorage.setItem("japaneseMode", "1");
     }
     while (datalistElem.firstChild) {
         datalistElem.removeChild(datalistElem.firstChild);
