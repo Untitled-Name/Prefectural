@@ -352,6 +352,7 @@ const prefecturesList = {
     },
 }
 
+
 const dateToday = genDateToday();
 const prefectureToday = getPrefecture();
 
@@ -684,7 +685,7 @@ function setGuesses(currentGuess=1, inputVal){
             document.getElementById("prefectureGuess").setAttribute("disabled", "");
             document.getElementById("remaining-text").style.display = "none";
             document.getElementById("winning-text").style.display = "block";
-            document.getElementById("winning-text").innerHTML = "<ruby><rb>地<rt>ち</rt></rb><rb>理<rt>り</rt></rb><rb>上<rt>じょう</rt></rb><rb>手<rt>ず</rt></rb></ruby>！";
+            document.getElementById("winning-text").innerHTML = "上手！";
             document.getElementById("hintLines").style.display = "none"
             document.getElementById("googleAnchor").style.display = "block";
             document.getElementById("googleAnchor").setAttribute("href", `https://www.google.com/search?q=${prefectureToday[1]} Prefecture`);

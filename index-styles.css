@@ -233,6 +233,9 @@ body {
     #imgDiv:hover #prefectureImage {
         transform: scale(3);
     }
+    #rightSideContainer{ 
+        padding-bottom: 0.7rem;
+    }
     #footerBar {
         position: static;
     }
