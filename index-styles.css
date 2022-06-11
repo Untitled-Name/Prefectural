@@ -1,12 +1,17 @@
 body {
     background-color: rgb(41, 41, 48);
     color: white;
-    overflow: hidden;
+    overflow: auto;
+    margin: 0;
+}
+main {
+    position: relative;
 }
 
 #introScreenContainer {
     display: none;
     position: absolute;
+    overflow: hidden;
     align-items: center;
     min-height: 100%;
     width: 100%;
@@ -26,16 +31,16 @@ body {
     left: 10%;
     bottom: 10%;
     z-index: 99;
-    height: 80vh;
+    height: 80%;
     width: 80%;
-    padding: 1%;
+    padding: 3px;
     background-color: #286173;
     border-radius: 25px;
     overflow-y: scroll;
 }
 
 #introScreenTitle{
-    font-size: 55px;
+    font-size: 3rem;
     font-family: Futura, "Trebuchet MS", Arial, sans-serif;
     text-align: center;
     color: #eef6f9;
@@ -43,7 +48,7 @@ body {
 }
 
 .introSubHeading {
-    font-size: 35px;
+    font-size: 2rem;
     font-family: Futura, "Trebuchet MS", Arial, sans-serif;
     color: #eef6f9;
     margin-left: 20px;
@@ -51,7 +56,7 @@ body {
 }
 
 .explainingText {
-    font-size: 18px;
+    font-size: 1.2rem;
     font-family: Futura, "Trebuchet MS", Arial, sans-serif;
     color: #eef6f9;
     margin-left: 20px;
@@ -119,7 +124,7 @@ body {
 }*/
 
 #titleText {
-    font-size: 8vh;
+    font-size: 3.5rem;
     font-family: Futura, "Trebuchet MS", Arial, sans-serif;
     text-align: center;
     margin-top: 4%;
@@ -130,7 +135,7 @@ body {
     display: block;
     margin-top: 4%;
     width: 98%;
-    font-size: 4vh;
+    font-size: 2rem;
 }
 
 .green-text {
@@ -138,7 +143,7 @@ body {
 }
 
 .description-text {
-    font-size: 2.8vh;
+    font-size: 1.5rem;
     font-family: Futura, "Trebuchet MS", Arial, sans-serif;
     text-align: center;
 }
@@ -159,13 +164,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3vh;
+    font-size: 1.3rem;
     font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 }
 
 #answerReveal {
     text-align: center;
-    font-size: 4vh;
+    font-size: 2rem;
     font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 }
 
@@ -179,7 +184,7 @@ body {
     text-align: center;
     text-decoration: none;
     color: white;
-    font-size: 3.3vh;
+    font-size: 1.4rem;
     font-family: Futura, "Trebuchet MS", Arial, sans-serif;
     width: 98%;
     padding: 0.8vh 0;
@@ -208,7 +213,7 @@ body {
 #japaneseModeButton {
     margin: 10px 0px 10px 0px;
     font-family: 'Kosugi Maru', sans-serif;
-    font-size: 4.2vh;
+    font-size: 2rem;
     color: #666;
 }
 
@@ -222,6 +227,9 @@ body {
     body {
         overflow-y: scroll;
         margin: 0;
+    }
+    .explainingText {
+        text-align: left;
     }
     .flex-wrapper {
         flex-direction: row;
@@ -242,10 +250,6 @@ body {
     .guessBoxes {
         height: 12%;
     }
-    
-    .guessTextContainer {
-        font-size: 3.6vh;
-    }
     #footerBar {
         position: static;
         left: 0;
@@ -254,17 +258,7 @@ body {
     #helpIcon {
         height: 5vh;
     }
-    #japaneseModeButton {
-        font-size: 5vh;
-    }
-    #introScreenTitle{
-        font-size: 40px;
-    }
     .introSubHeading {
-        text-align: center;
-    }
-    .explainingText {
-        font-size: 14px;
         text-align: center;
     }
     .definitionText {
